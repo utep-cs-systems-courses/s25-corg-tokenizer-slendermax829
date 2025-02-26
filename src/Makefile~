@@ -1,0 +1,24 @@
+#include <stdio.h>
+#include <string.h>
+
+int main() 
+{
+    while (1) { // Infinite while loop
+        char word[256];
+        fputs("$ ", stdout);
+        fflush(stdout);		
+        
+        fgets(word, sizeof(word),stdin);
+        word[strcspn(word, "\n")] = '\0';
+        
+        if(strcmp("quit",word) == 0){
+            goto done;
+        }
+        else{
+            printf("%s\n",word);
+        }
+    }
+    
+    done:
+    return 0;
+}

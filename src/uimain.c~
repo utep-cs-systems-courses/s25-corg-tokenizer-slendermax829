@@ -1,0 +1,28 @@
+#include <stdio.h>
+#include <string.h>
+#include "tokenizer.h"
+
+int main() 
+{
+    while (1) { // Infinite while loop
+        char word[256];
+        fputs("$ ", stdout);
+        fflush(stdout);		
+        
+        fgets(word, sizeof(word),stdin);
+        word[strcspn(word, "\n")] = '\0';
+        
+        if(strcmp("quit",word) == 0){
+            goto done;
+        }
+        else {
+            char **tokens = tokenize(word);
+            if (tokens != NULL) {
+                print_tokens(tokens);
+                free_tokens(tokens);
+            }
+        }
+    } 
+    done:
+    return 0;
+}
